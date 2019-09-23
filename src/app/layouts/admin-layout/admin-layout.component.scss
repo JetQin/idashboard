@@ -1,0 +1,33 @@
+nz-layout {
+  height: 100%;
+}
+
+.logo {
+
+  height: 32px;
+  margin: 16px 26px;
+
+  img {
+    display: inline-block;
+    height: 32px;
+    vertical-align: middle;
+  }
+
+  h1 {
+    display: inline-block;
+    margin: 0 0 0 12px;
+    color: #fff;
+    font-weight: 600;
+    font-size: 20px;
+    font-family: Avenir,Helvetica Neue,Arial,Helvetica,sans-serif;
+    vertical-align: middle;
+  }
+}
+
+.wrapper {
+  width: 240px;
+}
+
+nz-content {
+  margin: 16px 16px;
+}

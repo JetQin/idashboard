@@ -1,0 +1,35 @@
+.trigger {
+  font-size: 18px;
+  line-height: 64px;
+  padding: 0 24px;
+  cursor: pointer;
+  transition: color 0.3s;
+}
+
+.trigger:hover {
+  color: #1890ff;
+}
+
+nz-header {
+  background: #fff;
+  padding: 0;
+}
+
+.right-header {
+  float: right;
+  height: 100%;
+  padding-right: 20px;
+  overflow: hidden;
+}
+
+.user {
+  margin: 0 12px;
+}
+
+.content-link span {
+  margin-right: 10px;
+}
+
+[nz-icon] {
+  font-size: 18px;
+}

@@ -1,0 +1,35 @@
+<nz-header>
+  <i
+    class="trigger"
+    nz-icon
+    [nzType]="isCollapsed ? 'menu-unfold' : 'menu-fold'"
+    (click)="collapseHeader()"
+  ></i>
+  <div class="right-header">
+    <div class="content-link">
+      <span><i nz-icon nzType="user"></i></span>
+      <span><i nz-icon nzType="bell"></i></span>
+      <span nz-dropdown [nzDropdownMenu]="menu">
+         <nz-avatar nzIcon="user" nzSrc="//zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png"></nz-avatar>
+         <span className="user">{{username}}</span>
+      </span>
+    </div>
+    <a nz-dropdown [nzDropdownMenu]="menu">
+      <nz-avatar nzIcon="user" style="background-color:#87d068;"></nz-avatar>
+      <span className="user">{{username}}</span>
+    </a>
+    <nz-dropdown-menu #menu="nzDropdownMenu">
+        <ul nz-menu>
+          <li nz-menu-item (click)="gotoProfile()">
+            <i nz-icon nzType="user"></i><span> Profile </span>
+          </li>
+          <li nz-menu-item (click)="gotoProfile()">
+            <i nz-icon nzType="setting"></i><span> Setting </span>
+          </li>
+          <li nz-menu-item (click)="logout()">
+            <i nz-icon nzType="logout"></i><span>Logout</span>
+          </li>
+        </ul>
+    </nz-dropdown-menu>
+  </div>
+</nz-header>
