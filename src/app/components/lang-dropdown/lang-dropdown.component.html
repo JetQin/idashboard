@@ -1,0 +1,12 @@
+<span nz-dropdown [nzDropdownMenu]="menu" (nzVisibleChange)="change($event)">
+  <i nz-icon [nzType]="'global'" [nzTheme]="'outline'"></i>
+</span>
+<nz-dropdown-menu #menu="nzDropdownMenu">
+  <ul nz-menu *ngFor="let language of locales">
+    <li nz-menu-item>
+       <span role="img">
+          {{ languageIcons[language] }} {{ languageLabels[language] }}
+       </span>
+    </li>
+  </ul>
+</nz-dropdown-menu>

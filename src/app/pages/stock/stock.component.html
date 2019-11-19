@@ -1,0 +1,63 @@
+<div class="layout" nz-row>
+  <div class="nav-content" nz-col [nzSpan]="6">
+    <nz-input-group [nzSuffix]="suffixIconSearch">
+      <input type="text" nz-input placeholder="input search text" />
+    </nz-input-group>
+    <ng-template #suffixIconSearch>
+      <i nz-icon nzType="search"></i>
+    </ng-template>
+    <br />
+    <br />
+    <nz-list [nzDataSource]="data" [nzRenderItem]="item" [nzItemLayout]="'horizontal'" [nzLoading]="loading">
+      <ng-template #item let-item>
+        <nz-list-item>
+          <nz-list-item-meta
+            [nzTitle]="nzTitle"
+            nzAvatar="https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png"
+            nzDescription="Applications, is refined by Ant UED Team"
+          >
+            <ng-template #nzTitle>
+              <a href="https://ng.ant.design">{{ item.title }}</a>
+            </ng-template>
+          </nz-list-item-meta>
+        </nz-list-item>
+      </ng-template>
+    </nz-list>
+  </div>
+  <div class="detail-content" nz-col [nzSpan]="18">
+    <nz-table #filterTable [nzData]="listOfDisplayData">
+      <thead>
+      <tr>
+        <th
+          nzShowSort
+          nzShowFilter
+          [(nzSort)]="mapOfSort.name"
+          (nzSortChange)="sort('name', $event)"
+          [nzFilters]="listOfFilterName"
+          (nzFilterChange)="search($event, listOfSearchAddress)"
+        >
+          Name
+        </th>
+        <th nzShowSort [(nzSort)]="mapOfSort.age" (nzSortChange)="sort('age', $event)">Age</th>
+        <th
+          nzShowSort
+          nzShowFilter
+          [(nzSort)]="mapOfSort.address"
+          (nzSortChange)="sort('address', $event)"
+          [nzFilters]="listOfFilterAddress"
+          (nzFilterChange)="search(listOfSearchName, $event)"
+        >
+          Address
+        </th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr *ngFor="let data of filterTable.data">
+        <td>{{ data.name }}</td>
+        <td>{{ data.age }}</td>
+        <td>{{ data.address }}</td>
+      </tr>
+      </tbody>
+    </nz-table>
+  </div>
+</div>

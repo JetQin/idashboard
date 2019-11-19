@@ -1,0 +1,14 @@
+<nz-badge [nzCount]="5" [nzStyle]="{ backgroundColor: '#52c41a', top: '11px', right:'5px' }">
+  <span nz-dropdown [nzDropdownMenu]="menu" (nzVisibleChange)="change($event)">
+    <i nz-icon [nzType]="'bell'" [nzTheme]="'outline'"></i>
+  </span>
+  <nz-dropdown-menu #menu="nzDropdownMenu">
+    <ul nz-menu>
+      <li nz-menu-item>
+         <span role="img">
+            Test
+         </span>
+      </li>
+    </ul>
+  </nz-dropdown-menu>
+</nz-badge>

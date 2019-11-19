@@ -1,0 +1,13 @@
+<a class="content" nz-dropdown [nzDropdownMenu]="menu">
+  <nz-avatar nzIcon="user" class="avatar" [nzSrc]="avatarUrl"></nz-avatar>
+  <span className="user">{{ user }}</span>
+</a>
+<nz-dropdown-menu #menu="nzDropdownMenu">
+  <ul nz-menu *ngFor="let menu of menus" (nzClick)="handleMenuClick($event)">
+    <li nz-menu-item>
+       <span role="img">
+          <i nz-icon [nzType]="menu.icon" [nzTheme]="'outline'"></i> {{ menu.name }}
+       </span>
+    </li>
+  </ul>
+</nz-dropdown-menu>
