@@ -10,7 +10,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { registerLocaleData } from '@angular/common';
 import en from '@angular/common/locales/en';
 import { AdminLayoutComponent } from './layouts/admin-layout/admin-layout.component';
-import {ComponentsModule} from './components/components.module';
+import { ComponentsModule } from './components/components.module';
+import { ChatLayoutComponent } from './layouts/chat-layout/chat-layout.component';
 
 registerLocaleData(en);
 
@@ -18,6 +19,7 @@ registerLocaleData(en);
   declarations: [
     AppComponent,
     AdminLayoutComponent,
+    ChatLayoutComponent,
   ],
   imports: [
     BrowserModule,

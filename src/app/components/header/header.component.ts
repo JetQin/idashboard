@@ -16,7 +16,8 @@ export class HeaderComponent implements OnInit {
     { name: 'Profile', icon: 'user'},
     { name: 'Setting', icon: 'setting'},
     { name: 'Logout', icon: 'logout'}
-  ]
+  ];
+
   constructor(private router: Router) { }
 
   ngOnInit() {

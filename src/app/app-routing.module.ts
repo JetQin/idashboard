@@ -1,11 +1,12 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { AdminLayoutComponent } from './layouts/admin-layout/admin-layout.component';
+import { ChatLayoutComponent } from './layouts/chat-layout/chat-layout.component';
 
 const routes: Routes = [
   {
     path: '',
-    redirectTo: 'dashboard',
+    redirectTo: 'chat/dashboard',
     pathMatch: 'full'
   },
   {
@@ -16,6 +17,17 @@ const routes: Routes = [
       {
         path: '',
         loadChildren: './layouts/admin-layout/admin-layout.module#AdminLayoutModule'
+      }
+    ]
+  },
+  {
+    path: 'chat',
+    component: ChatLayoutComponent,
+    // canActivate: [ GuardService ],
+    children: [
+      {
+        path: '',
+        loadChildren: './layouts/chat-layout/chat-layout.module#ChatLayoutModule'
       }
     ]
   }

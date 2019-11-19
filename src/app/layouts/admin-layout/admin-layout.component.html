@@ -7,11 +7,18 @@
       </a>
     </div>
     <ul nz-menu nzMode="inline" nzTheme="dark" [nzInlineCollapsed]="isCollapsed" *ngFor="let menu of menus" (nzClick)="handleMenuClick($event)">
-      <li nz-menu-item nz-tooltip nzSelected>
+      <li nz-menu-item nz-tooltip [nzSelected]="menu.name === currentMenu">
         <i nz-icon nzType="{{menu.icon}}"></i>
-        <span>{{menu.name}}</span>
+        <a href="{{menu.link}}"><span>{{menu.name}}</span></a>
       </li>
     </ul>
+    <div class="menu-footer">
+      <ul nz-menu nzMode="inline" nzTheme="dark" [nzSelectable]="false" [nzInlineCollapsed]="isCollapsed" (nzClick)="handlePowerOff()">
+        <li nz-menu-item nz-tooltip [nzSelected]="false">
+          <i nz-icon nzType="poweroff"></i>
+        </li>
+      </ul>
+    </div>
   </nz-sider>
   <nz-layout>
     <app-header (collapsed)="collapseSidebar($event)"></app-header>

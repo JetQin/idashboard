@@ -8,14 +8,12 @@ import {Component, Input, OnInit} from '@angular/core';
 export class AdminLayoutComponent implements OnInit {
 
   @Input() isCollapsed = true;
+  private currentMenu: string;
 
   menus = [
-    { name: 'Dashboard', icon: 'dashboard'},
-    { name: 'License Manage', icon: 'profile'},
-    { name: 'Contract Manage', icon: 'profile'},
-    { name: 'Profile', icon: 'profile'},
-    { name: 'Setting', icon: 'setting'},
-    { name: 'Profile', icon: 'profile'},
+    { name: 'Dashboard', link: 'dashboard', icon: 'dashboard'},
+    { name: 'Setting', link: 'stock', icon: 'setting'},
+    { name: 'Profile', link: 'company', icon: 'profile'},
   ]
   constructor() { }
 
@@ -27,7 +25,11 @@ export class AdminLayoutComponent implements OnInit {
   }
 
   handleMenuClick(event) {
-    console.log(event);
+    this.currentMenu = event.el.innerText;
+  }
+
+  handlePowerOff() {
+    console.log('power off');
   }
 
 }
