@@ -12,6 +12,12 @@ export class DashboardComponent implements OnInit {
   code: string;
   suggestions: Array<string> = [];
   listOfStock: Array<Stock>;
+  indexs = [
+    {  title: '上证指数'},
+    {  title: '深证指数'},
+    {  title: '创业板指'},
+    {  title: '科技板指'},
+  ];
 
   constructor(private stockService: StockService) { }
 

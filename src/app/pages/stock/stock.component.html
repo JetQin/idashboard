@@ -1,52 +1,53 @@
 <div class="layout" nz-row>
-  <div class="nav-content" nz-col [nzSpan]="6">
-    <nz-input-group [nzSuffix]="suffixIconSearch">
-      <input type="text" nz-input placeholder="input search text" />
-    </nz-input-group>
-    <ng-template #suffixIconSearch>
-      <i nz-icon nzType="search"></i>
-    </ng-template>
-    <br />
-    <br />
-    <nz-list [nzDataSource]="listOfStock"
-             [nzRenderItem]="item"
-             [nzItemLayout]="'horizontal'"
-             [nzLoading]="loading">
-      <ng-template #item let-item>
-        <nz-list-item [nzContent]="stockBody" [nzActions]="[starAction]">
-          <ng-template #starAction>
-            <i nz-icon nzType="star" nzTheme="fill" nzTwotoneColor="yellow" style="margin-right: 8px;color: hotpink;" (click)="addToFavour($event.target)"></i>
-          </ng-template>
-          <ng-template #stockBody class="stock-body">
-            <span class="stock-body-text">今开:
-              <span class="{{ item.open > item.yestclose ? 'up-color' : 'down-color'}}">
-                {{item.open}}
-             </span>
-            </span>
-            <span class="stock-body-text">现价:
-              <span class="{{ item.price > item.open ? 'up-color' : 'down-color'}}">
-                {{item.price}}
-              </span>
-            </span>
-            <span class="stock-body-text">涨跌:
-              <span class="{{ item.updown > 0 ? 'up-color' : 'down-color'}}">
-                {{item.updown | percent:'.2'}}
-              </span>
-            </span>
-          </ng-template>
-          <nz-list-item-meta [nzAvatar]="item.avatar"
-                             [nzTitle]="nzTitle"
-                             [nzDescription]="item.symbol"
-                             class="stock-header">
-            <ng-template #nzTitle>
-              <a href="#">{{ item.name }}</a>
-            </ng-template>
-          </nz-list-item-meta>
-        </nz-list-item>
+  <div class="nav-content" nz-col [nzSpan]="7">
+    <nz-card>
+      <nz-input-group [nzSuffix]="suffixIconSearch">
+        <input type="text" nz-input placeholder="input search text" />
+      </nz-input-group>
+      <ng-template #suffixIconSearch>
+        <i nz-icon nzType="search"></i>
       </ng-template>
-    </nz-list>
+      <br />
+      <br />
+      <cdk-virtual-scroll-viewport itemSize="73" class="infinite-container">
+        <nz-list [nzDataSource]="listOfStock"
+                 [nzRenderItem]="item"
+                 [nzItemLayout]="'horizontal'"
+                 [nzLoading]="loading">
+          <ng-template #item let-item>
+            <nz-list-item [nzContent]="stockBody">
+              <ng-template #stockBody class="stock-body">
+              <span class="stock-body-text">今开:
+                <span class="{{ item.open > item.yestclose ? 'up-color' : 'down-color'}}">
+                  {{item.open}}
+               </span>
+              </span>
+                <span class="stock-body-text">现价:
+                <span class="{{ item.price > item.open ? 'up-color' : 'down-color'}}">
+                  {{item.price}}
+                </span>
+              </span>
+                <span class="stock-body-text">涨跌:
+                <span class="{{ item.updown > 0 ? 'up-color' : 'down-color'}}">
+                  {{item.updown | percent:'.2'}}
+                </span>
+              </span>
+              </ng-template>
+              <nz-list-item-meta [nzAvatar]="item.avatar"
+                                 [nzTitle]="nzTitle"
+                                 [nzDescription]="item.symbol"
+                                 class="stock-header">
+                <ng-template #nzTitle>
+                  <a href="#">{{ item.name }}</a>
+                </ng-template>
+              </nz-list-item-meta>
+            </nz-list-item>
+          </ng-template>
+        </nz-list>
+      </cdk-virtual-scroll-viewport>
+    </nz-card>
   </div>
-  <div class="detail-content" nz-col [nzSpan]="18">
+  <div class="detail-content" nz-col [nzSpan]="17">
 <!--    <nz-card nzTitle="基本信息">-->
 <!--      <div id="info-header" nz-row [nzGutter]="{ xs: 8, sm: 16, md: 24, lg: 32, xl: 32, xxl: 32 }">-->
 <!--        <div nz-col class="gutter-row" nzSpan="4">-->

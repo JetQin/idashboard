@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { CollectionViewer, DataSource } from '@angular/cdk/collections';
 import { StockService } from '../../services/stock.service';
 import { Stock } from '../../model/stock';
 

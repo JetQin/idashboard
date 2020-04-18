@@ -14,7 +14,7 @@ export class UserLayoutComponent implements OnInit {
   menus = [
     { name: 'Dashboard', link: 'dashboard', icon: 'dashboard'},
     { name: 'Setting', link: 'stock', icon: 'setting'},
-    { name: 'Profile', link: 'company', icon: 'profile'},
+    { name: 'Company', link: 'company', icon: 'profile'},
   ]
   constructor() { }
 
