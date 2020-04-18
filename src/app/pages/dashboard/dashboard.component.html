@@ -1,41 +1,70 @@
-<nz-table nzTemplateMode>
+
+
+
+<div class="searchBar" nz-row nzType="flex" nzJustify="space-around" nzAlign="middle">
+  <div nz-col nzSpan="8">
+    <nz-input-group nzSearch [nzAddOnAfter]="suffixIconButton">
+      <input type="text" nz-input placeholder=""
+             [(ngModel)]="code"
+             (input)="onInput($event.target)"
+             (keydown.enter)="findByCode()"
+             [nzAutocomplete]="auto"/>
+    </nz-input-group>
+    <ng-template #suffixIconButton>
+      <button nz-button nzType="primary" nzSearch (click)="findByCode()"><i nz-icon nzType="search"></i></button>
+    </ng-template>
+    <nz-autocomplete nzBackfill #auto>
+      <nz-auto-option *ngFor="let option of suggestions" [nzValue]="option">
+        {{ option }}
+      </nz-auto-option>
+    </nz-autocomplete>
+  </div>
+</div>
+<nz-table nzTemplateMode #stockTable [nzData]="listOfStock" [nzPageSize]="100">
   <thead>
     <tr>
-      <th>Company</th>
-      <th>Contact</th>
-      <th>Country</th>
+      <th [nzWidth]="120">代码</th>
+      <th [nzWidth]="200">名称</th>
+      <th [nzWidth]="120">今开</th>
+      <th [nzWidth]="120">最高</th>
+      <th [nzWidth]="120">最低</th>
+      <th [nzWidth]="120">价格</th>
+      <th [nzWidth]="120">昨收</th>
+      <th [nzWidth]="120">换手率</th>
+      <th [nzWidth]="120">每股收益</th>
+      <th [nzWidth]="120">市盈率</th>
+      <th [nzWidth]="120">涨跌幅</th>
+      <th [nzWidth]="120">涨跌额</th>
+      <th [nzWidth]="120">成交额</th>
+      <th [nzWidth]="120">成交量</th>
+      <th [nzWidth]="120">委比</th>
+      <th [nzWidth]="120">量比</th>
+      <th [nzWidth]="120">振幅</th>
+      <th [nzWidth]="120">净利润</th>
+      <th [nzWidth]="120">主营收</th>
     </tr>
   </thead>
   <tbody>
-    <tr>
-      <td>Alfreds Futterkiste</td>
-      <td>Maria Anders</td>
-      <td>Germany</td>
-    </tr>
-    <tr>
-      <td>Centro comercial Moctezuma</td>
-      <td>Francisco Chang</td>
-      <td>Mexico</td>
-    </tr>
-    <tr>
-      <td>Ernst Handel</td>
-      <td>Roland Mendel</td>
-      <td>Austria</td>
-    </tr>
-    <tr>
-      <td>Island Trading</td>
-      <td>Helen Bennett</td>
-      <td>UK</td>
-    </tr>
-    <tr>
-      <td>Laughing Bacchus Winecellars</td>
-      <td>Yoshi Tannamuri</td>
-      <td>Canada</td>
-    </tr>
-    <tr>
-      <td>Magazzini Alimentari Riuniti</td>
-      <td>Giovanni Rovelli</td>
-      <td>Italy</td>
+    <tr *ngFor="let data of stockTable.data">
+      <td> <a class="link-text">{{ data.symbol }}</a></td>
+      <td> <a class="link-text">{{ data.name }}</a></td>
+      <td class="{{ data.open > data.yestclose ? 'up-color' : 'down-color'}}">{{ data.open }}</td>
+      <td>{{ data.high }}</td>
+      <td>{{ data.low }}</td>
+      <td>{{ data.price }}</td>
+      <td>{{ data.yestclose }}</td>
+      <td>{{ data.hs }}</td>
+      <td>{{ data.mfsum }}</td>
+      <td>{{ data.pe }}</td>
+      <td class="{{ data.percent > 0 ? 'up-color' : 'down-color'}}" >{{ data.percent }}</td>
+      <td class="{{ data.updown > 0 ? 'up-color' : 'down-color'}}">{{ data.updown }}</td>
+      <td>{{ data.turnover }}</td>
+      <td>{{ data.volume }}</td>
+      <td>{{ data.wb }}</td>
+      <td>{{ data.lb }}</td>
+      <td>{{ data.zf }}</td>
+      <td>{{ data.mfratio2 }}</td>
+      <td>{{ data.mfratio10 }}</td>
     </tr>
   </tbody>
 </nz-table>

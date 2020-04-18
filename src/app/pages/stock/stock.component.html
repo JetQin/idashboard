@@ -8,16 +8,38 @@
     </ng-template>
     <br />
     <br />
-    <nz-list [nzDataSource]="data" [nzRenderItem]="item" [nzItemLayout]="'horizontal'" [nzLoading]="loading">
+    <nz-list [nzDataSource]="listOfStock"
+             [nzRenderItem]="item"
+             [nzItemLayout]="'horizontal'"
+             [nzLoading]="loading">
       <ng-template #item let-item>
-        <nz-list-item>
-          <nz-list-item-meta
-            [nzTitle]="nzTitle"
-            nzAvatar="https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png"
-            nzDescription="Applications, is refined by Ant UED Team"
-          >
+        <nz-list-item [nzContent]="stockBody" [nzActions]="[starAction]">
+          <ng-template #starAction>
+            <i nz-icon nzType="star" nzTheme="fill" nzTwotoneColor="yellow" style="margin-right: 8px;color: hotpink;" (click)="addToFavour($event.target)"></i>
+          </ng-template>
+          <ng-template #stockBody class="stock-body">
+            <span class="stock-body-text">今开:
+              <span class="{{ item.open > item.yestclose ? 'up-color' : 'down-color'}}">
+                {{item.open}}
+             </span>
+            </span>
+            <span class="stock-body-text">现价:
+              <span class="{{ item.price > item.open ? 'up-color' : 'down-color'}}">
+                {{item.price}}
+              </span>
+            </span>
+            <span class="stock-body-text">涨跌:
+              <span class="{{ item.updown > 0 ? 'up-color' : 'down-color'}}">
+                {{item.updown | percent:'.2'}}
+              </span>
+            </span>
+          </ng-template>
+          <nz-list-item-meta [nzAvatar]="item.avatar"
+                             [nzTitle]="nzTitle"
+                             [nzDescription]="item.symbol"
+                             class="stock-header">
             <ng-template #nzTitle>
-              <a href="https://ng.ant.design">{{ item.title }}</a>
+              <a href="#">{{ item.name }}</a>
             </ng-template>
           </nz-list-item-meta>
         </nz-list-item>
@@ -25,39 +47,58 @@
     </nz-list>
   </div>
   <div class="detail-content" nz-col [nzSpan]="18">
-    <nz-table #filterTable [nzData]="listOfDisplayData">
-      <thead>
-      <tr>
-        <th
-          nzShowSort
-          nzShowFilter
-          [(nzSort)]="mapOfSort.name"
-          (nzSortChange)="sort('name', $event)"
-          [nzFilters]="listOfFilterName"
-          (nzFilterChange)="search($event, listOfSearchAddress)"
-        >
-          Name
-        </th>
-        <th nzShowSort [(nzSort)]="mapOfSort.age" (nzSortChange)="sort('age', $event)">Age</th>
-        <th
-          nzShowSort
-          nzShowFilter
-          [(nzSort)]="mapOfSort.address"
-          (nzSortChange)="sort('address', $event)"
-          [nzFilters]="listOfFilterAddress"
-          (nzFilterChange)="search(listOfSearchName, $event)"
-        >
-          Address
-        </th>
-      </tr>
-      </thead>
-      <tbody>
-      <tr *ngFor="let data of filterTable.data">
-        <td>{{ data.name }}</td>
-        <td>{{ data.age }}</td>
-        <td>{{ data.address }}</td>
-      </tr>
-      </tbody>
-    </nz-table>
+<!--    <nz-card nzTitle="基本信息">-->
+<!--      <div id="info-header" nz-row [nzGutter]="{ xs: 8, sm: 16, md: 24, lg: 32, xl: 32, xxl: 32 }">-->
+<!--        <div nz-col class="gutter-row" nzSpan="4">-->
+<!--          <div class="gutter-box"><span>今开</span></div>-->
+<!--        </div>-->
+<!--        <div nz-col class="gutter-row" nzSpan="4">-->
+<!--          <div class="gutter-box"><span>现价</span></div>-->
+<!--        </div>-->
+<!--        <div nz-col class="gutter-row" nzSpan="4">-->
+<!--          <div class="gutter-box"><span>最高</span></div>-->
+<!--        </div>-->
+<!--        <div nz-col class="gutter-row" nzSpan="4">-->
+<!--          <div class="gutter-box"><span>最低</span></div>-->
+<!--        </div>-->
+<!--        <div nz-col class="gutter-row" nzSpan="4">-->
+<!--          <div class="gutter-box"><span>涨跌</span></div>-->
+<!--        </div>-->
+<!--        <div nz-col class="gutter-row" nzSpan="4">-->
+<!--          <div class="gutter-box"><span>涨幅</span></div>-->
+<!--        </div>-->
+<!--      </div>-->
+<!--      <div *ngIf="data.length">-->
+<!--        <v-chart [forceFit]="forceFit" [height]="400" [animate]="false" [padding]="[ 10, 40, 40, 40 ]"-->
+<!--                 [data]="dv" [scale]="scale1">-->
+<!--          <v-tooltip [showTitle]="tooltipOpts.showTitle" [itemTpl]="tooltipOpts.itemTpl"></v-tooltip>-->
+<!--          <v-axis></v-axis>-->
+<!--          <v-legend [offset]="20"></v-legend>-->
+<!--          <v-view [data]="dv" [end]="{x: 1, y: 0.5}">-->
+<!--            <v-candle position="time*range" [color]="candleOpts.color" [tooltip]="candleOpts.tooltip"></v-candle>-->
+<!--          </v-view>-->
+<!--          <v-view [data]="dv" [scale]="scale2" [start]="{x: 0, y: 0.65}" >-->
+<!--            <v-axis dataKey="time" [tickLine]="null" [label]="null"></v-axis>-->
+<!--            <v-axis dataKey="volumn" [label]="axis1Opts.label"></v-axis>-->
+<!--            <v-bar position="time*volumn" [color]="barOpts.color" [tooltip]="barOpts.tooltip"></v-bar>-->
+<!--          </v-view>-->
+<!--        </v-chart>-->
+<!--        <v-plugin>-->
+<!--          <v-slider [width]="'auto'" [height]="26"-->
+<!--                    container='viser-slider-1'-->
+<!--                    [padding]="[ 20, 40, 20, 40 ]" [start]="start" [end]="end" [data]="data"-->
+<!--                    [xAxis]="'time'" [yAxis]="'volumn'" [scales]="scales" [onChange]="this.slideChange">-->
+
+<!--          </v-slider>-->
+<!--        </v-plugin>-->
+<!--      </div>-->
+<!--    </nz-card>-->
+    <app-candlechart></app-candlechart>
+    <nz-card nzTitle="涨停预测">
+      <p>Card Header</p>
+    </nz-card>
+    <nz-card nzTitle="价格预测">
+      <p>Card Header</p>
+    </nz-card>
   </div>
 </div>

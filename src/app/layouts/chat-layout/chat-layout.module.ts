@@ -2,11 +2,13 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 import { ChatLayoutRoutingModule } from './chat-layout-routing.module';
-import {NgZorroAntdModule} from 'ng-zorro-antd';
-import {ComponentsModule} from '../../components/components.module';
-import {StockComponent} from '../../pages/stock/stock.component';
-import {CompanyComponent} from '../../pages/company/company.component';
-import {DashboardComponent} from '../../pages/dashboard/dashboard.component';
+import { NgZorroAntdModule } from 'ng-zorro-antd';
+import { ComponentsModule } from '../../components/components.module';
+import { StockComponent } from '../../pages/stock/stock.component';
+import { CompanyComponent } from '../../pages/company/company.component';
+import { DashboardComponent } from '../../pages/dashboard/dashboard.component';
+import { FormsModule } from '@angular/forms';
+import { ViserModule } from 'viser-ng';
 
 
 @NgModule({
@@ -15,7 +17,9 @@ import {DashboardComponent} from '../../pages/dashboard/dashboard.component';
     CommonModule,
     ChatLayoutRoutingModule,
     ComponentsModule,
-    NgZorroAntdModule
+    NgZorroAntdModule,
+    FormsModule,
+    ViserModule
   ]
 })
 export class ChatLayoutModule { }

@@ -1,5 +1,11 @@
 import { Component, OnInit } from '@angular/core';
-import { Data } from '@angular/router';
+import { StockService } from '../../services/stock.service';
+import { Stock } from '../../model/stock';
+// @ts-ignore
+// import { DataSet } from '@antv/data-set';
+import { ViserModule } from 'viser-ng';
+// const { DataView } = DataSet;
+
 
 @Component({
   selector: 'app-stock',
@@ -9,138 +15,134 @@ import { Data } from '@angular/router';
 export class StockComponent implements OnInit {
 
   loading = false;
-  data = [
-    {
-      title: 'Ant Design Title 1'
-    },
-    {
-      title: 'Ant Design Title 2'
-    },
-    {
-      title: 'Ant Design Title 3'
-    },
-    {
-      title: 'Ant Design Title 4'
-    }
-  ];
-  listOfSearchName: string[] = [];
-  listOfSearchAddress: string[] = [];
-  listOfFilterName = [{ text: 'Joe', value: 'Joe' }, { text: 'Jim', value: 'Jim' }];
-  listOfFilterAddress = [{ text: 'London', value: 'London' }, { text: 'Sidney', value: 'Sidney' }];
-  listOfData: Data[] = [
-    {
-      name: 'John Brown',
-      age: 32,
-      address: 'New York No. 1 Lake Park'
-    },
-    {
-      name: 'Jim Green',
-      age: 42,
-      address: 'London No. 1 Lake Park'
-    },
-    {
-      name: 'Joe Black',
-      age: 32,
-      address: 'Sidney No. 1 Lake Park'
-    },
-    {
-      name: 'Jim Red',
-      age: 32,
-      address: 'London No. 2 Lake Park'
-    }
-  ];
-  listOfDisplayData = [...this.listOfData];
-  mapOfSort: { [key: string]: string | null } = {
-    name: null,
-    age: null,
-    address: null
-  };
-  sortName: string | null = null;
-  sortValue: string | null = null;
+  listOfStock: Array<Stock>;
 
-  constructor() { }
+  // forceFit = true;
+  // data = [];
+  // dv = [];
+  // start = '2015-07-07';
+  // end = '2015-07-28';
+  // scales = {time: { type: 'timeCat', nice: false}};
+  // scale1 = [
+  //   { dataKey: 'time', type: 'timeCat', nice: false, range: [ 0, 1 ]},
+  //   { dataKey: 'trend', values: [ '上涨', '下跌' ]},
+  //   { dataKey: 'volumn', alias: '成交量'},
+  //   { dataKey: 'start', alias: '开盘价'},
+  //   { dataKey: 'end', alias: '收盘价'},
+  //   { dataKey: 'max', alias: '最高价'},
+  //   { dataKey: 'min', alias: '最低价'},
+  //   { dataKey: 'range', alias: '股票价格'}];
+  //
+  // scale2 = [{ dataKey: 'volumn', tickCount: 2}];
+  //
+  // tooltipOpts = {
+  //   showTitle: false,
+  //   itemTpl: '<li data-index={index}>'
+  //     + '<span style="background-color:{color};" class="g2-tooltip-marker"></span>'
+  //     + '{name}{value}</li>',
+  // };
+  //
+  // candleOpts = {
+  //   color: ['trend', val => {
+  //     if (val === '上涨') {
+  //       return '#f04864';
+  //     }
+  //
+  //     if (val === '下跌') {
+  //       return '#2fc25b';
+  //     }
+  //   }],
+  //   tooltip: ['time*start*end*max*min', (time, start, end, max, min) => {
+  //     return {
+  //       name: time,
+  //       value: '<br><span style="padding-left: 16px">开盘价：' + start + '</span><br/>'
+  //         + '<span style="padding-left: 16px">收盘价：' + end + '</span><br/>'
+  //         + '<span style="padding-left: 16px">最高价：' + max + '</span><br/>'
+  //         + '<span style="padding-left: 16px">最低价：' + min + '</span>'
+  //     };
+  //   }],
+  // };
+  //
+  // axis1Opts = {
+  //   label: {
+  //     formatter: val => {
+  //       return parseInt(String(val / 1000), 10) + 'k';
+  //     }
+  //   }
+  // };
+  //
+  // barOpts = {
+  //   color: ['trend',  val => {
+  //     if (val === '上涨') {
+  //       return '#f04864';
+  //     }
+  //
+  //     if (val === '下跌') {
+  //       return '#2fc25b';
+  //     }
+  //   }],
+  //   tooltip: ['time*volumn', (time, volumn) => {
+  //     return {
+  //       name: time,
+  //       value: '<br/><span style="padding-left: 16px">成交量：' + volumn + '</span><br/>'
+  //     };
+  //   }]
+  // };
+
+
+  constructor(private stockService: StockService) { }
 
   ngOnInit() {
+    this.listStock();
+    // this.stockService.loadData('assets/stock.json').subscribe(resp => {
+    //   this.data = resp;
+    //   // @ts-ignore
+    //   this.dv = this.getData();
+    // });
   }
 
-  change(): void {
-    this.loading = true;
-    if (this.data.length > 0) {
-      setTimeout(() => {
-        this.data = [];
-        this.loading = false;
-      }, 1000);
-    } else {
-      setTimeout(() => {
-        this.data = [
-          {
-            title: 'Ant Design Title 1'
-          },
-          {
-            title: 'Ant Design Title 2'
-          },
-          {
-            title: 'Ant Design Title 3'
-          },
-          {
-            title: 'Ant Design Title 4'
-          }
-        ];
-        this.loading = false;
-      }, 1000);
-    }
+
+  addToFavour(event: any) {
+    console.log(event);
   }
 
-  sort(sortName: string, value: string): void {
-    this.sortName = sortName;
-    this.sortValue = value;
-    for (const key in this.mapOfSort) {
-      this.mapOfSort[key] = key === sortName ? value : null;
-    }
-    this.search(this.listOfSearchName, this.listOfSearchAddress);
+  listStock() {
+    this.stockService.listStock()
+      .subscribe(result => this.listOfStock = result);
   }
 
-  search(listOfSearchName: string[], listOfSearchAddress: string[]): void {
-    this.listOfSearchName = listOfSearchName;
-    this.listOfSearchAddress = listOfSearchAddress;
-    const filterFunc = (item: Data) =>
-      (this.listOfSearchAddress.length
-        ? this.listOfSearchAddress.some(address => item.address.indexOf(address) !== -1)
-        : true) &&
-      (this.listOfSearchName.length ? this.listOfSearchName.some(name => item.name.indexOf(name) !== -1) : true);
-    const listOfData = this.listOfData.filter((item: Data) => filterFunc(item));
-    if (this.sortName && this.sortValue) {
-      this.listOfDisplayData = listOfData.sort((a, b) =>
-        this.sortValue === 'ascend'
-          ? a[this.sortName!] > b[this.sortName!]
-          ? 1
-          : -1
-          : b[this.sortName!] > a[this.sortName!]
-          ? 1
-          : -1
-      );
-    } else {
-      this.listOfDisplayData = listOfData;
-    }
-  }
-
-  resetFilters(): void {
-    this.listOfFilterName = [{ text: 'Joe', value: 'Joe' }, { text: 'Jim', value: 'Jim' }];
-    this.listOfFilterAddress = [{ text: 'London', value: 'London' }, { text: 'Sidney', value: 'Sidney' }];
-    this.listOfSearchName = [];
-    this.listOfSearchAddress = [];
-    this.search(this.listOfSearchName, this.listOfSearchAddress);
-  }
-
-  resetSortAndFilters(): void {
-    this.sortName = null;
-    this.sortValue = null;
-    this.mapOfSort = {
-      name: null,
-      age: null,
-      address: null
-    };
-    this.resetFilters();
-    this.search(this.listOfSearchName, this.listOfSearchAddress);
-  }
+  // slideChange = (opts: any) => {
+  //   this.start = opts.startText;
+  //   this.end = opts.endText;
+  //   // @ts-ignore
+  //   this.dv = this.getData();
+  // }
+  //
+  // getData = () => {
+  //   const { start, end, data } = this;
+  //   const ds = new DataSet({
+  //     state: {
+  //       start,
+  //       end,
+  //     }
+  //   });
+  //   const dv = ds.createView();
+  //   dv.source(data)
+  //     .transform({
+  //       type: 'filter',
+  //       callback: obj => {
+  //         const date = obj.time;
+  //         return date <= end && date >= start;
+  //       }
+  //     })
+  //     .transform({
+  //       type: 'map',
+  //       callback: obj => {
+  //         obj.trend = (obj.start <= obj.end) ? '上涨' : '下跌';
+  //         obj.range = [ obj.start, obj.end, obj.max, obj.min ];
+  //         return obj;
+  //       }
+  //     });
+  //   return dv;
+  // }
 }
