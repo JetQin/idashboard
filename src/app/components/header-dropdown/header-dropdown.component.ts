@@ -7,15 +7,15 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HeaderDropdownComponent implements OnInit {
 
-  private menus = [
+  public menus = [
     {name: 'User', icon: 'user'},
     {name: 'Setting', icon: 'setting'},
     {name: 'Logout', icon: 'logout'},
   ];
 
-  private user = 'Jet Qin999';
+  public user = 'Jet Qin999';
 
-  private avatarUrl = 'https://gw.alipayobjects.com/zos/antfincdn/XAosXuNZyF/BiazfanxmamNRoxxVxka.png';
+  public avatarUrl = 'https://gw.alipayobjects.com/zos/antfincdn/XAosXuNZyF/BiazfanxmamNRoxxVxka.png';
 
   constructor() { }
 

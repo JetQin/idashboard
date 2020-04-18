@@ -8,7 +8,7 @@ import {Component, Input, OnInit} from '@angular/core';
 export class AdminLayoutComponent implements OnInit {
 
   @Input() isCollapsed = true;
-  private currentMenu: string;
+  public currentMenu: string;
 
   menus = [
     { name: 'Dashboard', link: 'dashboard', icon: 'dashboard'},

@@ -12,6 +12,7 @@ import en from '@angular/common/locales/en';
 import { AdminLayoutComponent } from './layouts/admin-layout/admin-layout.component';
 import { ComponentsModule } from './components/components.module';
 import { ChatLayoutComponent } from './layouts/chat-layout/chat-layout.component';
+import { UserLayoutComponent } from './layouts/user-layout/user-layout.component';
 
 registerLocaleData(en);
 
@@ -20,6 +21,7 @@ registerLocaleData(en);
     AppComponent,
     AdminLayoutComponent,
     ChatLayoutComponent,
+    UserLayoutComponent
   ],
   imports: [
     BrowserModule,

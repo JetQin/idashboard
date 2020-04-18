@@ -8,7 +8,6 @@ import { StockComponent } from '../../pages/stock/stock.component';
 import { CompanyComponent } from '../../pages/company/company.component';
 import { DashboardComponent } from '../../pages/dashboard/dashboard.component';
 import { FormsModule } from '@angular/forms';
-import { ViserModule } from 'viser-ng';
 
 
 @NgModule({
@@ -19,7 +18,6 @@ import { ViserModule } from 'viser-ng';
     ComponentsModule,
     NgZorroAntdModule,
     FormsModule,
-    ViserModule
   ]
 })
 export class ChatLayoutModule { }

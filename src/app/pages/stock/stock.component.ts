@@ -1,10 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { StockService } from '../../services/stock.service';
 import { Stock } from '../../model/stock';
-// @ts-ignore
-// import { DataSet } from '@antv/data-set';
-import { ViserModule } from 'viser-ng';
-// const { DataView } = DataSet;
 
 
 @Component({

@@ -7,7 +7,6 @@ import { FooterComponent } from './footer/footer.component';
 import { LangDropdownComponent } from './lang-dropdown/lang-dropdown.component';
 import { HeaderDropdownComponent } from './header-dropdown/header-dropdown.component';
 import { NotifyDropdownComponent } from './notify-dropdown/notify-dropdown.component';
-import { ViserModule } from 'viser-ng';
 
 
 @NgModule({
@@ -21,7 +20,6 @@ import { ViserModule } from 'viser-ng';
   imports: [
     CommonModule,
     NgZorroAntdModule,
-    ViserModule
   ],
   exports: [
     FooterComponent,

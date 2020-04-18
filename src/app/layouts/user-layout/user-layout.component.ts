@@ -1,13 +1,14 @@
 import {Component, Input, OnInit} from '@angular/core';
 
 @Component({
-  selector: 'app-chat-layout',
-  templateUrl: './chat-layout.component.html',
-  styleUrls: ['./chat-layout.component.scss']
+  selector: 'app-user-layout',
+  templateUrl: './user-layout.component.html',
+  styleUrls: ['./user-layout.component.scss']
 })
-export class ChatLayoutComponent implements OnInit {
+export class UserLayoutComponent implements OnInit {
 
-  @Input() isCollapsed = true;
+  isCollapsed = true;
+  @Input() isLogin = false;
   public currentMenu: string;
 
   menus = [
@@ -17,20 +18,15 @@ export class ChatLayoutComponent implements OnInit {
   ]
   constructor() { }
 
-  ngOnInit() {
-  }
+  ngOnInit() {}
 
-  collapseSidebar(collapse: boolean) {
-    this.isCollapsed = collapse;
-  }
-
-  handleMenuClick(event) {
-    this.currentMenu = event.target.text;
+  handleMenuClick(menu: string) {
+    this.currentMenu = menu;
   }
 
   handlePowerOff() {
     console.log('power off');
+    this.isLogin = !this.isLogin;
   }
-
 
 }
